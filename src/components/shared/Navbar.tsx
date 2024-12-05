@@ -1,47 +1,77 @@
-import { Link, NavLink } from "react-router-dom"
-import { navbarLinks } from "../../constants/links"
-import { HiOutlineSearch, HiOutlineShoppingBag } from "react-icons/hi"
-import { FaBarsStaggered } from "react-icons/fa6"
-import { Logo } from "./Logo"
+import { Link, NavLink } from 'react-router-dom';
+import { navbarLinks } from '../../constants/links';
+import {
+	HiOutlineSearch,
+	HiOutlineShoppingBag,
+} from 'react-icons/hi';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { Logo } from './Logo';
+import { useGlobalStore } from '../../store/global.store';
+import { useCartStore } from '../../store/cart.store';
 
 export const Navbar = () => {
-  return <header className="flex items-center justify-between px-5 py-4 text-black bg-white border-b border-slate-200 lg:px-12">
-    <Logo />
+	const openSheet = useGlobalStore(state => state.openSheet);
 
-    <nav className="hidden space-x-5 md:flex">
-        {
-            navbarLinks.map(link => (
-                <NavLink 
-                    key={link.id}
-                    to={link.href}
-                    className={({isActive}) => ` ${isActive ? 'text-cyan-600 underline' : ''} transition-all duration-300 font-medium hover:text-cyan-600 hover:underline ` }
-                >
-                    {link.title}
-                </NavLink>
-            ))
-        }
-    </nav>
+	const totalItemsInCart = useCartStore(
+		state => state.totalItemsInCart
+	);
 
-    <div className="flex items-center gap-5">
-        <button>
-            <HiOutlineSearch size={25} />
-        </button>
+	const setActiveNavMobile = useGlobalStore(
+		state => state.setActiveNavMobile
+	);
 
-        <div className="relative">
-            {/* USERNAV */}
-            <Link to='/account' className="grid text-lg font-bold border-2 rounded-full border-slate-700 w-9 h-9 place-items-center">
-                R
-            </Link>
-        </div>
+	return (
+		<header className='flex items-center justify-between px-5 py-4 text-black bg-white border-b border-slate-200 lg:px-12'>
+			<Logo />
 
-        <button className="relative">
-            <span className="absolute grid w-5 h-5 text-xs text-white bg-black rounded-full -bottom-2 -right-2 place-items-center">0</span>
-            <HiOutlineShoppingBag size={25} />
-        </button>
-    </div>
+			<nav className='hidden space-x-5 md:flex'>
+				{navbarLinks.map(link => (
+					<NavLink
+						key={link.id}
+						to={link.href}
+						className={({ isActive }) =>
+							`${
+								isActive ? 'text-cyan-600 underline' : ''
+							} transition-all duration-300 font-medium hover:text-cyan-600 hover:underline `
+						}
+					>
+						{link.title}
+					</NavLink>
+				))}
+			</nav>
 
-    <button className="md:hidden">
-        <FaBarsStaggered size={25} />
-    </button>
-  </header>
-}
+			<div className='flex items-center gap-5'>
+				<button onClick={() => openSheet('search')}>
+					<HiOutlineSearch size={25} />
+				</button>
+
+				<div className='relative'>
+					{/* User Nav */}
+					<Link
+						to='/account'
+						className='grid text-lg font-bold border-2 rounded-full border-slate-700 w-9 h-9 place-items-center'
+					>
+						R
+					</Link>
+				</div>
+
+				<button
+					className='relative'
+					onClick={() => openSheet('cart')}
+				>
+					<span className='absolute grid w-5 h-5 text-xs text-white bg-black rounded-full -bottom-2 -right-2 place-items-center'>
+						{totalItemsInCart}
+					</span>
+					<HiOutlineShoppingBag size={25} />
+				</button>
+			</div>
+
+			<button
+				className='md:hidden'
+				onClick={() => setActiveNavMobile(true)}
+			>
+				<FaBarsStaggered size={25} />
+			</button>
+		</header>
+	);
+};
