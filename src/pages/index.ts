@@ -8,3 +8,7 @@ export * from './OrdersUserPage'
 export * from './CheckoutPage';
 export * from './ThankyouPage';
 export * from './OrderUserPage';
+
+// dashboard page
+
+export * from './dashboard/DashboardProductsPage'
