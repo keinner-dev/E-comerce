@@ -1,24 +1,37 @@
-import { Link, useParams } from 'react-router-dom';
-import { useOrder } from '../hooks';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useOrder, useUser } from '../hooks';
 import { Loader } from '../components/shared/Loader';
 import { CiCircleCheck } from 'react-icons/ci';
 import { formatPrice } from '../helpers';
+import { useEffect } from 'react';
+import { supabase } from '../supabase/client';
 
 export const ThankyouPage = () => {
 	const { id } = useParams<{ id: string }>();
 
 	const { data, isLoading, isError } = useOrder(Number(id));
+	const { isLoading: isLoadingSession } = useUser();
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		supabase.auth.onAuthStateChange(async (event, session) => {
+			if (event === 'SIGNED_OUT' || !session) {
+				navigate('/login');
+			}
+		});
+	}, [navigate]);
 
 	if (isError) return <div>Error al cargar la orden</div>;
 
-	if (isLoading || !data) return <Loader />;
+	if (isLoading || !data || isLoadingSession) return <Loader />;
 
 	return (
 		<div className='flex flex-col h-screen'>
-			<header className='text-black flex items-center justify-center flex-col px-10 py-12'>
+			<header className='flex flex-col items-center justify-center px-10 py-12 text-black'>
 				<Link
 					to='/'
-					className='text-4xl font-bold self-center tracking-tighter transition-all md:text-5xl'
+					className='self-center text-4xl font-bold tracking-tighter transition-all md:text-5xl'
 				>
 					<p>
 						Celulares
@@ -27,8 +40,8 @@ export const ThankyouPage = () => {
 				</Link>
 			</header>
 
-			<main className='container flex-1 flex flex-col items-center gap-10'>
-				<div className='flex gap-3 items-center'>
+			<main className='container flex flex-col items-center flex-1 gap-10'>
+				<div className='flex items-center gap-3'>
 					<CiCircleCheck size={40} />
 
 					<p className='text-4xl'>
@@ -68,13 +81,13 @@ export const ThankyouPage = () => {
 							{data.orderItems.map((item, index) => (
 								<li
 									key={index}
-									className='flex justify-between items-center gap-3'
+									className='flex items-center justify-between gap-3'
 								>
 									<div className='flex'>
 										<img
 											src={item.productImage}
 											alt={item.productName}
-											className='w-16 h-16 object-contain'
+											className='object-contain w-16 h-16'
 										/>
 									</div>
 
@@ -83,7 +96,7 @@ export const ThankyouPage = () => {
 											<p className='font-semibold'>
 												{item.productName}
 											</p>
-											<p className='text-sm font-medium text-gray-600 mt-1'>
+											<p className='mt-1 text-sm font-medium text-gray-600'>
 												{formatPrice(item.price)}
 											</p>
 										</div>
@@ -148,7 +161,7 @@ export const ThankyouPage = () => {
 
 					<Link
 						to='/celulares'
-						className='text-white bg-black py-4 text-sm rounded-md px-5 tracking-tight font-semibold'
+						className='px-5 py-4 text-sm font-semibold tracking-tight text-white bg-black rounded-md'
 					>
 						Seguir comprando
 					</Link>
@@ -157,3 +170,4 @@ export const ThankyouPage = () => {
 		</div>
 	);
 };
+
