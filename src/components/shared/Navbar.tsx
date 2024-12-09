@@ -3,11 +3,14 @@ import { navbarLinks } from '../../constants/links';
 import {
 	HiOutlineSearch,
 	HiOutlineShoppingBag,
+	HiOutlineUser,
 } from 'react-icons/hi';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { Logo } from './Logo';
 import { useGlobalStore } from '../../store/global.store';
 import { useCartStore } from '../../store/cart.store';
+import { useUser } from '../../hooks';
+import { LuLoader2 } from 'react-icons/lu';
 
 export const Navbar = () => {
 	const openSheet = useGlobalStore(state => state.openSheet);
@@ -19,6 +22,10 @@ export const Navbar = () => {
 	const setActiveNavMobile = useGlobalStore(
 		state => state.setActiveNavMobile
 	);
+
+	const { session, isLoading } = useUser();
+
+	const userId = session?.user.id;
 
 	return (
 		<header className='flex items-center justify-between px-5 py-4 text-black bg-white border-b border-slate-200 lg:px-12'>
@@ -45,7 +52,11 @@ export const Navbar = () => {
 					<HiOutlineSearch size={25} />
 				</button>
 
-				<div className='relative'>
+				{
+					isLoading ? (
+						<LuLoader2 className='animate-spin' size={60}/>
+					) : session ? (
+						<div className='relative'>
 					{/* User Nav */}
 					<Link
 						to='/account'
@@ -54,6 +65,12 @@ export const Navbar = () => {
 						R
 					</Link>
 				</div>
+					) : (
+						<Link to='/login'>
+							<HiOutlineUser size={25} />
+						</Link>
+					)
+				}
 
 				<button
 					className='relative'
