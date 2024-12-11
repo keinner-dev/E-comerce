@@ -88,8 +88,8 @@ export const VariantsInput = ({
 
 	return (
 		<div className='flex flex-col gap-3'>
-			<div className='space-y-4 border-b border-slate-200 pb-6'>
-				<div className='grid grid-cols-5 gap-4 justify-start'>
+			<div className='pb-6 space-y-4 border-b border-slate-200'>
+				<div className='grid justify-start grid-cols-5 gap-4'>
 					{headersVariants.map((header, index) => (
 						<p
 							key={index}
@@ -101,7 +101,7 @@ export const VariantsInput = ({
 				</div>
 				{fields.map((field, index) => (
 					<div key={field.id}>
-						<div className='grid grid-cols-5 gap-4 items-center'>
+						<div className='grid items-center grid-cols-5 gap-4'>
 							<input
 								type='number'
 								placeholder='Stock'
@@ -128,7 +128,7 @@ export const VariantsInput = ({
 								className='border rounded-md px-3 py-1.5 text-xs font-semibold placeholder:font-normal focus:outline-none appearance-none'
 							/>
 
-							<div className='flex relative'>
+							<div className='relative flex'>
 								{colorActive[index] && (
 									<div className='absolute bg-stone-100 rounded-md bottom-8 left-[40px] p-1 w-[100px] h-fit space-y-2'>
 										<input
@@ -146,7 +146,7 @@ export const VariantsInput = ({
 									</div>
 								)}
 								<button
-									className='border w-full h-8 cursor-pointer rounded text-xs font-medium flex items-center justify-center'
+									className='flex items-center justify-center w-full h-8 text-xs font-medium border rounded cursor-pointer'
 									type='button'
 									onClick={() => toggleColorActive(index)}
 								>
@@ -175,7 +175,7 @@ export const VariantsInput = ({
 						</div>
 
 						{errors.variants && errors.variants[index] && (
-							<p className='text-red-500 text-xs mt-1'>
+							<p className='mt-1 text-xs text-red-500'>
 								{getFirstError(errors.variants[index])}
 							</p>
 						)}
@@ -186,14 +186,14 @@ export const VariantsInput = ({
 			<button
 				type='button'
 				onClick={addVariant}
-				className='px-4 py-2 text-slate-800 rounded-md text-sm font-semibold tracking-tight flex items-center gap-1 self-center hover:bg-slate-100'
+				className='flex items-center self-center gap-1 px-4 py-2 text-sm font-semibold tracking-tight rounded-md text-slate-800 hover:bg-slate-100'
 			>
 				<IoIosAddCircleOutline size={16} />
 				Añadir Variante
 			</button>
 
 			{fields.length === 0 && errors.variants && (
-				<p className='text-red-500 text-xs mt-1'>
+				<p className='mt-1 text-xs text-red-500'>
 					Debes añadir al menos una variante
 				</p>
 			)}

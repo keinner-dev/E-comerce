@@ -12,7 +12,10 @@ import {
 	ThankyouPage,
 	OrderUserPage,
 	DashboardProductsPage,
-	DashboardNewProductsPage
+	DashboardNewProductPage,
+	DashboardProductSlugPage,
+	DashboardOrdersPage,
+	DashboardOrderPage,
 } from '../pages';
 import { ClientLayout } from '../layouts/ClientLayout';
 import { DashboardLayout } from '../layouts/DashboardLayout';
@@ -80,16 +83,28 @@ export const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <Navigate to='/dashboard/productos' />
+				element: <Navigate to='/dashboard/productos' />,
 			},
 			{
 				path: 'productos',
-				element: <DashboardProductsPage />
+				element: <DashboardProductsPage />,
 			},
 			{
 				path: 'productos/new',
-				element: <DashboardNewProductsPage />,
-			}
-		]
-	}
+				element: <DashboardNewProductPage />,
+			},
+			{
+				path: 'productos/editar/:slug',
+				element: <DashboardProductSlugPage />,
+			},
+			{
+				path: 'ordenes',
+				element: <DashboardOrdersPage />,
+			},
+			{
+				path: 'ordenes/:id',
+				element: <DashboardOrderPage />,
+			},
+		],
+	},
 ]);

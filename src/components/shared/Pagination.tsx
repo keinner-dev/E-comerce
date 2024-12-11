@@ -52,4 +52,3 @@ export const Pagination = ({ totalItems, page, setPage }: Props) => {
 		</div>
 	);
 };
-

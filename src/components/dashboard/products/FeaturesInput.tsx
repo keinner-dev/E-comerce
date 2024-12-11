@@ -37,15 +37,15 @@ export const FeaturesInput = ({ control, errors }: Props) => {
 				Características:
 			</label>
 
-			<ul className='space-y-3 pl-5'>
+			<ul className='pl-5 space-y-3'>
 				{fields.map((field, index) => (
 					<li
 						key={field.id}
 						className='flex items-center justify-between gap-2'
 					>
 						<div className='flex items-center gap-2'>
-							<div className='bg-slate-500 h-2 w-2 rounded-full' />
-							<span className='text-sm text-slate-600 font-medium'>
+							<div className='w-2 h-2 rounded-full bg-slate-500' />
+							<span className='text-sm font-medium text-slate-600'>
 								{field.value}
 							</span>
 						</div>
@@ -53,7 +53,7 @@ export const FeaturesInput = ({ control, errors }: Props) => {
 						<button
 							type='button'
 							onClick={() => remove(index)}
-							className='text-sm text-red-500 font-bold pr-2 hover:scale-110'
+							className='pr-2 text-sm font-bold text-red-500 hover:scale-110'
 						>
 							X
 						</button>
@@ -74,7 +74,7 @@ export const FeaturesInput = ({ control, errors }: Props) => {
 			/>
 
 			{errors.features && (
-				<p className='text-red-500 text-xs mt-1'>
+				<p className='mt-1 text-xs text-red-500'>
 					{errors.features.message}
 				</p>
 			)}

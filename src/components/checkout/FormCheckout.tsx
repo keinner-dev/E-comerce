@@ -45,8 +45,8 @@ export const FormCheckout = () => {
 
 	if (isPending) {
 		return (
-			<div className='flex flex-col gap-3 h-screen items-center justify-center'>
-				<ImSpinner2 className='animate-spin h-10 w-10' />
+			<div className='flex flex-col items-center justify-center h-screen gap-3'>
+				<ImSpinner2 className='w-10 h-10 animate-spin' />
 
 				<p className='text-sm font-medium'>
 					Estamos procesando tu pedido
@@ -99,7 +99,7 @@ export const FormCheckout = () => {
 					/>
 
 					<select
-						className='border border-slate-200 rounded-md p-3'
+						className='p-3 border rounded-md border-slate-200'
 						{...register('country')}
 					>
 						<option value='Ecuador'>Ecuador</option>
@@ -109,14 +109,14 @@ export const FormCheckout = () => {
 				<div className='flex flex-col gap-3'>
 					<p className='text-sm font-medium'>Métodos de envío</p>
 
-					<div className='flex justify-between items-center text-sm border border-slate-600 bg-stone-100 py-4 rounded-md px-6'>
+					<div className='flex items-center justify-between px-6 py-4 text-sm border rounded-md border-slate-600 bg-stone-100'>
 						<span className='font-normal'>Standard</span>
 						<span className='font-semibold'>Gratis</span>
 					</div>
 				</div>
 
 				<div className='flex flex-col'>
-					<div className='flex justify-between items-center text-sm border border-slate-600 bg-stone-100 py-4 rounded-ss-md rounded-se-md px-6'>
+					<div className='flex items-center justify-between px-6 py-4 text-sm border border-slate-600 bg-stone-100 rounded-ss-md rounded-se-md'>
 						<span>Depósito Bancario</span>
 					</div>
 
@@ -135,7 +135,7 @@ export const FormCheckout = () => {
 				</div>
 
 				<div className='flex flex-col gap-6'>
-					<h3 className='font-semibold text-3xl'>
+					<h3 className='text-3xl font-semibold'>
 						Resumen del pedido
 					</h3>
 

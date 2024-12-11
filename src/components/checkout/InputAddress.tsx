@@ -32,7 +32,7 @@ export const InputAddress = ({
 				/>
 			</div>
 			{errors[name] && (
-				<p className='text-red-500 text-xs'>{errors[name].message}</p>
+				<p className='text-xs text-red-500'>{errors[name].message}</p>
 			)}
 		</>
 	);

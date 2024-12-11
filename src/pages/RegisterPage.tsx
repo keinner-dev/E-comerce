@@ -115,5 +115,3 @@ export const RegisterPage = () => {
 		</div>
 	);
 };
-
-

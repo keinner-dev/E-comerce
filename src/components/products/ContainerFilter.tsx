@@ -10,22 +10,21 @@ const availableBrands = [
 ];
 
 interface Props {
-	selectedBrands : string[];
-	setSelectedBrands : (brands: string[]) => void;
+	selectedBrands: string[];
+	setSelectedBrands: (brands: string[]) => void;
 }
 
-export const ContainerFilter = ({selectedBrands, setSelectedBrands}: Props) => {
-
-	const handleBrandChaange = (brand: string) => {
-		if(selectedBrands.includes(brand)){
-			setSelectedBrands(selectedBrands.filter(b => b !== brand))
+export const ContainerFilter = ({
+	selectedBrands,
+	setSelectedBrands,
+}: Props) => {
+	const handleBrandChange = (brand: string) => {
+		if (selectedBrands.includes(brand)) {
+			setSelectedBrands(selectedBrands.filter(b => b !== brand));
 		} else {
-			setSelectedBrands([...selectedBrands, brand])
+			setSelectedBrands([...selectedBrands, brand]);
 		}
-
-	}
-
-
+	};
 
 	return (
 		<div className='col-span-2 p-5 border rounded-lg border-slate-200 h-fit lg:col-span-1'>
@@ -44,7 +43,7 @@ export const ContainerFilter = ({selectedBrands, setSelectedBrands}: Props) => {
 								type='checkbox'
 								className='text-black border-black focus:ring-black accent-black'
 								checked={selectedBrands.includes(brand)}
-								onChange={() => handleBrandChaange(brand)}
+								onChange={() => handleBrandChange(brand)}
 							/>
 							<span className='ml-2 text-sm text-black cursor-pointer'>
 								{brand}

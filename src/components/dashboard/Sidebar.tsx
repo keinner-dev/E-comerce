@@ -13,7 +13,7 @@ export const Sidebar = () => {
 		<div className='w-[120px] bg-stone-800 text-white flex flex-col gap-10 items-center p-5 fixed h-screen lg:w-[250px]'>
 			<Logo isDashboard/>
 
-			<nav className='w-full space-y-5 flex-1'>
+			<nav className='flex-1 w-full space-y-5'>
 				{dashboardLinks.map(link => (
 					<NavLink
 						key={link.id}
@@ -27,7 +27,7 @@ export const Sidebar = () => {
 						}
 					>
 						{link.icon}
-						<p className='font-semibold hidden lg:block'>
+						<p className='hidden font-semibold lg:block'>
 							{link.title}
 						</p>
 					</NavLink>

@@ -17,7 +17,7 @@ export const Tag = ({ contentTag }: Props) => {
 		<div
 			className={`text-white w-fit px-2 ${getTagColor(contentTag)}`}
 		>
-			<p className='uppercase text-xs font-medium'> {contentTag}</p>
+			<p className='text-xs font-medium uppercase'> {contentTag}</p>
 		</div>
 	);
 };

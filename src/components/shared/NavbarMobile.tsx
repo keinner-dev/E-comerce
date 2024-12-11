@@ -9,7 +9,7 @@ export const NavbarMobile = () => {
 	);
 
 	return (
-		<div className='bg-white text-black h-screen w-full shadow-lg animate-slide-in-left fixed z-50 flex justify-center py-32'>
+		<div className='fixed z-50 flex justify-center w-full h-screen py-32 text-black bg-white shadow-lg animate-slide-in-left'>
 			<button
 				className='absolute top-5 right-5'
 				onClick={() => setActiveNavMobile(false)}

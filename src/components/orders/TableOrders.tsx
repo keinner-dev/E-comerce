@@ -54,4 +54,3 @@ export const TableOrders = ({ orders }: Props) => {
 		</div>
 	);
 };
-
